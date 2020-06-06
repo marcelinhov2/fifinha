@@ -1,0 +1,131 @@
+{
+  "result": {
+      "credits": 69456,
+      "auctionInfo": [
+          {
+              "tradeId": 282612771246,
+              "itemData": {
+                  "id": 408025496444,
+                  "timestamp": 1591480757,
+                  "formation": "f5221",
+                  "untradeable": false,
+                  "assetId": 180403,
+                  "rating": 82,
+                  "itemType": "player",
+                  "resourceId": 180403,
+                  "owners": 2,
+                  "discardValue": 656,
+                  "itemState": "free",
+                  "cardsubtypeid": 3,
+                  "lastSalePrice": 2500,
+                  "fitness": 99,
+                  "injuryType": "none",
+                  "injuryGames": 0,
+                  "preferredPosition": "RW",
+                  "training": 0,
+                  "contract": 7,
+                  "teamid": 5,
+                  "rareflag": 1,
+                  "playStyle": 250,
+                  "leagueId": 13,
+                  "assists": 0,
+                  "lifetimeAssists": 0,
+                  "loyaltyBonus": 0,
+                  "pile": 6,
+                  "nation": 54,
+                  "resourceGameYear": 2020,
+                  "groups": [
+                      5,
+                      9
+                  ],
+                  "attributeArray": [
+                      85,
+                      78,
+                      80,
+                      85,
+                      49,
+                      60
+                  ],
+                  "statsArray": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                  ],
+                  "lifetimeStatsArray": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                  ],
+                  "skillmoves": 3,
+                  "weakfootabilitytypecode": 4,
+                  "attackingworkrate": 2,
+                  "defensiveworkrate": 2,
+                  "trait1": 67109384,
+                  "trait2": 0,
+                  "preferredfoot": 1
+              },
+              "tradeState": "closed",
+              "buyNowPrice": 2500,
+              "currentBid": 2500,
+              "offers": 0,
+              "watched": false,
+              "bidState": "buyNow",
+              "startingBid": 700,
+              "confidenceValue": 100,
+              "expires": -1,
+              "sellerName": "FIFA UT",
+              "sellerEstablished": 0,
+              "sellerId": 0,
+              "tradeOwner": false,
+              "coinsProcessed": 1,
+              "tradeIdStr": "282612771246"
+          }
+      ],
+      "duplicateItemIdList": [
+          {
+              "itemId": 408025496444,
+              "duplicateItemId": 362172088148
+          }
+      ],
+      "bidTokens": {},
+      "currencies": [
+          {
+              "name": "COINS",
+              "funds": 69456,
+              "finalFunds": 69456
+          },
+          {
+              "name": "POINTS",
+              "funds": 0,
+              "finalFunds": 0
+          },
+          {
+              "name": "DRAFT_TOKEN",
+              "funds": 0,
+              "finalFunds": 0
+          }
+      ],
+      "dynamicObjectivesUpdates": {
+          "needsGroupsRefresh": false,
+          "needsAutoClaim": false
+      }
+  },
+  "cheapestPlayerData": {
+      "price": 2500,
+      "tradeId": 282612771246,
+      "id": 408025496444
+  },
+  "event": {
+      "X-UT-SID": "ea77e564-b306-4d88-99a5-ea50ca148bf2",
+      "player": {
+          "maskedDefId": 180403
+      },
+      "search": {
+          "maxb": 3000
+      }
+  }
+}
