@@ -1,0 +1,21 @@
+{
+  "name": "fifinha",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-step-functions": "^2.19.0",
+    "serverless-step-functions-offline": "^2.1.4"
+  },
+  "private": true,
+  "workspaces": [
+    "athena",
+    "ignition",
+    "underminer"
+  ]
+}
