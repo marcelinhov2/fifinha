@@ -2,8 +2,11 @@
 
 const request = require('request-promise-native');
 const _ = require('lodash');
+const sellPlayer = require('../sellPlayer/sellPlayer')
 
 module.exports = async(event, context, callback) => {
+  const serialize = (obj) => (Object.entries(obj).map(i => [i[0], encodeURIComponent(i[1])].join('=')).join('&'))
+  
   const getDefaultHeaders = () => {
     return {  
       "Accept": "*/*",
@@ -26,8 +29,8 @@ module.exports = async(event, context, callback) => {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	};
 
-  const playerSearch = async (start = 0, num = 21) => {
-    const url = `https://utas.external.s2.fut.ea.com/ut/game/fifa20/transfermarket?start=0&num=21&type=player&maskedDefId=${event.player.maskedDefId}&maxb=${event.search.maxb}&macr=${Math.floor(Math.random() * event.search.maxb) + 1}`;
+  const playerSearch = async (transaction) => {
+    const url = `https://utas.external.s2.fut.ea.com/ut/game/fifa20/transfermarket?${serialize(transaction.search)}&macr=${(Math.floor((Math.random() + transaction.search.maxb) * 150 + 10)) * 100}`;
 
     const options = {
       method: 'GET',
@@ -55,32 +58,68 @@ module.exports = async(event, context, callback) => {
     return await request(options);
   }
 
-  const playerSearchResults = await playerSearch();
-  const parsedResults = JSON.parse(playerSearchResults);
+  const action = async () => {
+    console.log('-----------------------------------------------------');
+    const clone = _.clone(event.transactions)
+    const transaction = _.sample(clone);
 
-  if(!parsedResults.auctionInfo.length)
-    return callback('no player found')
+    console.log('transaction: ', JSON.stringify(transaction))
 
-  const cheapestPlayer = _.minBy(parsedResults.auctionInfo, 'buyNowPrice');
+    const sleepTime = (Math.floor((Math.random()) * 30 + 10)) * 100;
+    await sleep(sleepTime);
 
-  const cheapestPlayerData = {
-    price: cheapestPlayer.buyNowPrice,
-    tradeId: cheapestPlayer.tradeId,
-    id: cheapestPlayer.itemData.id
-  };
+    const playerSearchResults = await playerSearch(transaction);
+    const parsedResults = JSON.parse(playerSearchResults);
 
-  try {
-    const result = await buyPlayer(cheapestPlayerData);
-    await sleep(10000);
-
-    const response = {
-      result,
-      cheapestPlayerData,
-      event
+    if(!parsedResults.auctionInfo.length) {
+      console.log('no player found')
+      return await action();
     }
 
-    return callback(null, response);
-  } catch (e) {
-    return callback('no player found')
+    const cheapestPlayer = _.minBy(parsedResults.auctionInfo, 'buyNowPrice');
+
+    const cheapestPlayerData = {
+      price: cheapestPlayer.buyNowPrice,
+      tradeId: cheapestPlayer.tradeId,
+      id: cheapestPlayer.itemData.id,
+      sellPrice: transaction.sellPrice
+    };
+
+    console.log('ENCONTRADO: ', cheapestPlayerData)
+
+    try {
+      const buyPlayerResult = await buyPlayer(cheapestPlayerData);
+
+      console.log('BuyPlayerResult: ', JSON.stringify(buyPlayerResult))
+
+      const response = {
+        "X-UT-SID": event["X-UT-SID"],
+        cheapestPlayerData: cheapestPlayerData
+      }
+
+      console.log('COMPRADO: ', JSON.stringify(response))
+
+      await sleep(sleepTime);
+
+      try {
+        await sellPlayer(response, {}, (result) => {
+          console.log('ANUNCIADO: ', cheapestPlayerData)
+        });
+      } catch (e) {
+        console.log('::::::::::::::::')
+        console.log('ERRO AO ANUNCIAR: ', cheapestPlayerData)
+        console.log(e)
+        console.log('::::::::::::::::')
+      }
+
+      // return callback(null, response);
+    } catch (e) {
+      console.log('no player buyed')
+      // return callback('no player buyed')
+    }
+
+    return await action();
   }
+
+  await action();
 };

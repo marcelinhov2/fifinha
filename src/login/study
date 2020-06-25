@@ -1,0 +1,50 @@
+fetch("https://accounts.ea.com/connect/auth?client_id=FOS-SERVER&redirect_uri=nucleus:rest&response_type=code&access_token=QVQwOjMuMDozLjA6MjQwOjhXc2ZOdE5Dd2RlalhBcDlZZHI3RXNrTWVHaUVsRGM1UVROOjc3MzMyOnBhOTdm&release_type=prod&client_sequence=ut-auth", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://www.easports.com/fifa/ultimate-team/web-app/",
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": null,
+  "method": "GET",
+  "mode": "cors"
+});
+
+fetch("https://utas.external.s2.fut.ea.com/ut/auth", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "no-cache",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "x-ut-phishing-token": "6253423118237822826"
+  },
+  "referrer": "https://www.easports.com/fifa/ultimate-team/web-app/",
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"isReadOnly\":false,\"sku\":\"FUT20WEB\",\"clientVersion\":1,\"locale\":\"en-US\",\"method\":\"authcode\",\"priorityLevel\":4,\"identification\":{\"authCode\":\"QUOwABQuY20Gq_r4ys6kBDzDE0VAez91GFqlKTfp\",\"redirectUrl\":\"nucleus:rest\"},\"nucleusPersonaId\":1003406477332,\"gameSku\":\"FFA20PS4\",\"ds\":\"1e7784469f8e0934d5a4ae95bfae1eb6f827df09cb5c3c30788b7447a50d25df/e148\"}",
+  "method": "POST",
+  "mode": "cors"
+});
+
+fetch("https://utas.external.s2.fut.ea.com/ut/game/fifa20/settings", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "x-ut-sid": "f7b5bdac-7b9a-40e9-82cd-19419cb23b24"
+  },
+  "referrer": "https://www.easports.com/fifa/ultimate-team/web-app/",
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": null,
+  "method": "GET",
+  "mode": "cors"
+});

@@ -18,7 +18,7 @@ module.exports = async(event, context, callback) => {
       "Sec-Fetch-Mode": "cors",
       "Sec-Fetch-Site": "cross-site",
       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac,OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36",
-      "X-UT-SID": event.event["X-UT-SID"]
+      "X-UT-SID": event["X-UT-SID"]
     }
   };
 
@@ -57,7 +57,7 @@ module.exports = async(event, context, callback) => {
       },
       "startingBid": event.cheapestPlayerData.price,
       "duration": 3600,
-      "buyNowPrice": finalPrice
+      "buyNowPrice": event.cheapestPlayerData.sellPrice
     }
 
     const options = {
