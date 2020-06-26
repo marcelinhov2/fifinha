@@ -30,13 +30,17 @@ module.exports = async(event, context, callback) => {
 	};
 
   const playerSearch = async (transaction) => {
-    const url = `https://utas.external.s2.fut.ea.com/ut/game/fifa20/transfermarket?${serialize(transaction.search)}&macr=${(Math.floor((Math.random() + transaction.search.maxb) * 150 + 10)) * 100}`;
+    const macr = (Math.floor((Math.random() + transaction.search.maxb) * 15 + 10)) * 100;
+    const url = `https://utas.external.s2.fut.ea.com/ut/game/fifa20/transfermarket?${serialize(transaction.search)}&macr=${macr}`;
+
+    console.log('transaction: ', JSON.stringify(transaction))
 
     const options = {
       method: 'GET',
       url,
       headers: getDefaultHeaders(),
-      gzip: true
+      gzip: true,
+      proxy: 'http://lum-customer-marcelo_andrade-zone-rapidapi:mu0j9cfmicgh@zproxy.luminati.io:22225'
     };
   
     return await request(options);
@@ -52,7 +56,8 @@ module.exports = async(event, context, callback) => {
       gzip: true,
       json: {
         bid: cheapestPlayer.price
-      }
+      },
+      proxy: 'http://lum-customer-marcelo_andrade-zone-rapidapi:mu0j9cfmicgh@zproxy.luminati.io:22225'
     };
 
     return await request(options);
@@ -63,9 +68,8 @@ module.exports = async(event, context, callback) => {
     const clone = _.clone(event.transactions)
     const transaction = _.sample(clone);
 
-    console.log('transaction: ', JSON.stringify(transaction))
-
-    const sleepTime = (Math.floor((Math.random()) * 30 + 10)) * 100;
+    const sleepTime = (Math.floor((Math.random()) * 30 + 20)) * 100;
+    // const sleepTime = 1000;
     await sleep(sleepTime);
 
     const playerSearchResults = await playerSearch(transaction);
